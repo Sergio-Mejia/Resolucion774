@@ -1,16 +1,17 @@
 <?php
 include("../Conexion/conexion.php");
-include('../Class/class_ingreso.php');
+include('../Class/class_servicio.php');
 
 
-$ing = new Ingresos();
+$ing = new Servicio();
 
 if (isset($_POST['grabar']) && $_POST['grabar'] == "si") {
-    $ing->editar($_POST['id'], $_POST['descripcion'], $_POST['valor']);
+    $ing->editar($_POST['id'], $_POST['ganancia'], $_POST['frecuencia'], $_POST['potencia']);
     exit();
 }
 
-$reg = $ing->buscarIngreso($_GET['id']);
+$reg = $ing->buscarservicio($_GET['id_servicio']);
+// 
 ?>
 
 <!doctype html>
@@ -43,34 +44,23 @@ $reg = $ing->buscarIngreso($_GET['id']);
     <div class="container position-absolute top-50 start-50 translate-middle" style="width: 600px; margin:auto;border-radius: 5px;background:white;">
         <table class="table table-borderless">
             <div class="card-body">
-                <h2 class="Centrar">Editar Ingreso</h2>
+                <h2 class="Centrar">Editar Servicio</h2>
                 <hr>
                 <form action="#" method="POST">
                     <input type="hidden" name="grabar" value="si">
-                    <label for="id">Id</label>
-                    <input class="form-control" type="number" name="id" value="<?php echo $_GET['id'] ?>" readonly>
-                    <tr>
-                        <td class="align-baseline">
-                            <label for="desc">Descripción</label>
-                            <input class="form-control" type="text" value="<?php echo $reg[0]['descripcion'] ?>" name="descripcion" Required>
-                        </td>
-                        <td class="align-baseline">
-                            <label for="valor">Valor</label>
-                            <input class="form-control" type="number" value="<?php echo $reg[0]['valor'] ?>" name="valor" Required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align-bottom">
-                            <div class="col-md-4">
-                                <a class="btn btn-success" name="correo" href="../Home/home.php">Volver</a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="col-md-4">
-                                <button class="btn btn-success" name="correo">Editar</button>
-                            </div>
-                        </td>
-                    </tr>
+                    <label>Servicio</label>
+                    <input type="number" name="id" value="<?php echo $reg[0]['id_servicio'] ?> ">
+                    <label for="">Frecuencia</label>
+                    <input type="text" name="frecuencia" value="<?php echo $reg[0]['frecuencia'] ?>" required>
+
+                    <label for="">Potencia del Transmisor</label>
+                    <input type="text" name="potencia" value="<?php echo $reg[0]['potencia'] ?>" required>
+
+                    <label for="">Ganancia</label>
+                    <input type="text" name="ganancia" value="<?php echo $reg[0]['ganancia'] ?>" required>
+                    <div>
+                        <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Editar Servicio</button>
+                    </div>
                 </form>
         </table>
 

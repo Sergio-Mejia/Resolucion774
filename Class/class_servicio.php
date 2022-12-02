@@ -16,44 +16,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <script type="text/javascript" language="javascript" src="../js/funciones.js"></script>
-    <title>Egresos</title>
+    <title>Gestión Servicio</title>
 </head>
 
 <body>
     <?php
 
 
-    //clase ingresos 
-    class Egresos{
-        private $egreso;
+    //clase servicios 
+    class Servicio{
+        private $servicio;
 
         public function __construct()
         {
-            $this->egreso = array();
+            $this->servicio = array();
         }
 
-        //mostar Egresos
+        //mostar servicios
 
-        public function Mostrar($user)
+        public function Mostrar()
         {
-            $sql = "SELECT `id`, `descripcion`, `valor` FROM `ingresos/egresos` WHERE `estado_fk`=2 and `Usuario_idUsuario`=$user";
+            $sql = "SELECT `id_servicio`, `id_estacion_fk`, `ganancia`, `frecuencia`, `potencia` FROM `servicio` WHERE 1";
             $res = mysqli_query(Conexion::conectar(), $sql);
 
             while ($row = mysqli_fetch_assoc($res)) {
-                $this->egreso[] = $row;
+                $this->servicio[] = $row;
             }
-            return $this->egreso;
+            return $this->servicio;
         }
 
-        public function insertar1($desc, $valor,$user)
+        public function insertar($id_fk,$ganancia,$frecuencia,$potencia)
         {
-            $sql = "INSERT INTO `ingresos/egresos`( `descripcion`, `valor`, `estado_fk`,`Usuario_idUsuario`) VALUES ('$desc', $valor, 2,$user)";
-            $res = mysqli_query(Conexion::conectar(), $sql) or die("Error en la consulta sql al insertar ingreso");
+            $sql = "INSERT INTO `servicio`(`id_estacion_fk`, `ganancia`, `frecuencia`, `potencia`) VALUES ('$id_fk','$ganancia','$frecuencia','$potencia')";
+            $res = mysqli_query(Conexion::conectar(), $sql) or die("Error en la consulta sql al insertar servicio");
             echo " 
                 <script type = 'text/javascript'>
                 Swal.fire({
                     title: 'Exito',
-                    text: 'El egreso se registro correctamente',
+                    text: 'El servicio se registro correctamente',
                     icon: 'success',
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
@@ -63,7 +63,7 @@
                       }
                 }).then((result)=>{
                         if(result.value){
-                            window.location ='../Home/home.php';
+                            window.location ='../Home/servicio.php';
                         }
                     });
                 </script>
@@ -72,15 +72,15 @@
 
 
 
-        public function  editar($id, $desc, $valor)
+        public function  editar($id,$ganancia,$frecuencia,$potencia)
         {
-            $sql = "UPDATE `ingresos/egresos` SET `descripcion`='$desc',`valor`=$valor WHERE id=$id";
+            $sql = "UPDATE `servicio` SET `ganancia`='$ganancia',`frecuencia`='$frecuencia',`potencia`='$potencia' WHERE `id_servicio`=$id";
             $res = mysqli_query(Conexion::conectar(), $sql) or die("Error en la consulta sql al editar");
             echo " 
             <script type = 'text/javascript'>
             Swal.fire({
                 title: 'Exito',
-                text: 'El egreso con id $id fue modificado',
+                text: 'El servicio con id $id fue modificado',
                 icon: 'success',
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown'
@@ -90,45 +90,32 @@
                   }
             }).then((result)=>{
                     if(result.value){
-                        window.location ='../Home/home.php';
+                        window.location ='../Home/servicio.php';
                     }
                 });
             </script>
         ";
         }
 
-        public function suma($id)
+        public function buscarservicio($id)
         {
-            $sql = "SELECT sum(valor) as 'respuesta', descripcion from `ingresos/egresos` WHERE `estado_fk`=2 and `Usuario_idUsuario`=$id";
-            $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al sumar");
-
-            if ($reg = mysqli_fetch_assoc($res)) {
-                $this->ingreso[] = $reg;
-            }
-            return $this->ingreso;
-        }
-
-
-        //Crear una función para capturar el id de los botones de acción 
-        public function buscarIngreso($id)
-        {
-            $sql = "select * from `ingresos/egresos` where `id` = $id";
+            $sql = "select * from `servicio` where `id_servicio` = $id";
             $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al buscar");
             if ($reg = mysqli_fetch_assoc($res)) {
-                $this->egreso[] = $reg;
+                $this->servicio[] = $reg;
             }
-            return $this->egreso;
+            return $this->servicio;
         }
 
         public function Eliminar($id)
         {
-            $sql = "DELETE FROM `ingresos/egresos` WHERE `ingresos/egresos`.`id` = $id";
+            $sql = "DELETE FROM `servicio` WHERE `id_servicio` = $id";
             $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al Eliminar");
             echo " 
             <script type = 'text/javascript'>
             Swal.fire({
                 title: 'Exito',
-                text: 'El egreso con id $id fue eliminado',
+                text: 'El servicio con id $id fue eliminado',
                 icon: 'success',
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown'
@@ -138,7 +125,7 @@
                   }
             }).then((result)=>{
                     if(result.value){
-                        window.location ='../Home/home.php';
+                        window.location ='../Home/servicio.php';
                     }
                 });
             </script>

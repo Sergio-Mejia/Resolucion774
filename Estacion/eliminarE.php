@@ -2,7 +2,7 @@
 include("../Conexion/conexion.php");
 include('../Class/class_egreso.php');
 
-$eg = new Egresos();
+$eg = new Estacion();
 $eg->Eliminar($_GET['id']);
 
 ?>

@@ -16,44 +16,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <script type="text/javascript" language="javascript" src="../js/funciones.js"></script>
-    <title>Gestión Empleados</title>
+    <title>estacions</title>
 </head>
 
 <body>
     <?php
 
 
-    //clase ingresos 
-    class Ingresos{
-        private $ingreso;
+    //clase estacion 
+    class Estacion{
+        private $estacion;
 
         public function __construct()
         {
-            $this->ingreso = array();
+            $this->estacion = array();
         }
 
-        //mostar Ingresos
+        //mostar estacion
 
-        public function Mostrar($id)
+        public function Mostrar()
         {
-            $sql = "SELECT `id`, `descripcion`, `valor` FROM `ingresos/egresos` WHERE `estado_fk`=1 and `Usuario_idUsuario`=$id";
+            $sql = "SELECT `id`, `nombre`, `direccion`, `departamento`, `municipio`, `tipo_area`, `altura`, `latitud`, `longitud` FROM `estacion`";
             $res = mysqli_query(Conexion::conectar(), $sql);
 
             while ($row = mysqli_fetch_assoc($res)) {
-                $this->ingreso[] = $row;
+                $this->estacion[] = $row;
             }
-            return $this->ingreso;
+            return $this->estacion;
         }
 
-        public function insertar($desc, $valor,$user)
+        public function insertar1($nombre, $direccion, $departamento, $municipio, $tipo_area, $altura, $latitud, $longitud)
         {
-            $sql = "INSERT INTO `ingresos/egresos`( `descripcion`, `valor`, `estado_fk`,`Usuario_idUsuario`) VALUES ('$desc', $valor, 1,$user)";
+            $sql = "INSERT INTO `estacion`(`nombre`, `direccion`, `departamento`, `municipio`, `tipo_area`, `altura`, `latitud`, `longitud`) VALUES ('$nombre','$direccion','$departamento','$municipio','$tipo_area','$altura','$latitud','$longitud')";
             $res = mysqli_query(Conexion::conectar(), $sql) or die("Error en la consulta sql al insertar ingreso");
             echo " 
                 <script type = 'text/javascript'>
                 Swal.fire({
                     title: 'Exito',
-                    text: 'El ingreso se registro correctamente',
+                    text: 'La estacion se registro correctamente',
                     icon: 'success',
                     showClass: {
                         popup: 'animate__animated animate__fadeInDown'
@@ -72,15 +72,15 @@
 
 
 
-        public function  editar($id, $desc, $valor)
+        public function  editar($id,$nombre, $direccion, $departamento, $municipio, $tipo_area, $altura, $latitud, $longitud)
         {
-            $sql = "UPDATE `ingresos/egresos` SET `descripcion`='$desc',`valor`=$valor WHERE id=$id";
+            $sql = "UPDATE `estacion` SET `nombre`='$nombre',`direccion`='$direccion',`departamento`='$departamento',`municipio`='$municipio',`tipo_area`='$tipo_area',`altura`='$altura',`latitud`='$latitud',`longitud`='$longitud' WHERE id=$id";
             $res = mysqli_query(Conexion::conectar(), $sql) or die("Error en la consulta sql al editar");
             echo " 
             <script type = 'text/javascript'>
             Swal.fire({
                 title: 'Exito',
-                text: 'El ingreso con id $id fue modificado',
+                text: 'La estacion con id $id fue modificada',
                 icon: 'success',
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown'
@@ -97,37 +97,16 @@
         ";
         }
 
-        public function suma($id)
-        {
-            $sql = "SELECT sum(valor) as 'respuesta', descripcion from `ingresos/egresos` WHERE `estado_fk`=1 and `Usuario_idUsuario`=$id";
-            $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al sumar");
-
-            if ($reg = mysqli_fetch_assoc($res)) {
-                $this->ingreso[] = $reg;
-            }
-            return $this->ingreso;
-        }
-
-        //Crear una función para capturar el id de los botones de acción 
-        public function buscarIngreso($id)
-        {
-            $sql = "select * from `ingresos/egresos` where `id` = $id";
-            $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al buscar");
-            if ($reg = mysqli_fetch_assoc($res)) {
-                $this->ingreso[] = $reg;
-            }
-            return $this->ingreso;
-        }
 
         public function Eliminar($id)
         {
-            $sql = "DELETE FROM `ingresos/egresos` WHERE `ingresos/egresos`.`id` = $id";
+            $sql = "DELETE FROM `estacion` WHERE `id` = $id";
             $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al Eliminar");
             echo " 
             <script type = 'text/javascript'>
             Swal.fire({
                 title: 'Exito',
-                text: 'El ingreso con id $id fue eliminado',
+                text: 'La estacion con id $id fue eliminado',
                 icon: 'success',
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown'
@@ -142,6 +121,18 @@
                 });
             </script>
         ";
+        }
+
+
+        //Crear una función para capturar el id de los botones de acción 
+        public function buscarEstacion($id)
+        {
+            $sql = "select * from `estacion` where `id` = $id";
+            $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al buscar");
+            if ($reg = mysqli_fetch_assoc($res)) {
+                $this->estacion[] = $reg;
+            }
+            return $this->estacion;
         }
     }
     ?>

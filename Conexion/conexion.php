@@ -3,7 +3,7 @@
 class Conexion{
     public static function Conectar (){
         $link = mysqli_connect("localhost","root","") or die ("Error al conectar a la BD");
-        mysqli_select_db($link,"financiera") or die ("Error al seleccionar la BD");
+        mysqli_select_db($link,"resolucion") or die ("Error al seleccionar la BD");
         return $link;
     }
 }

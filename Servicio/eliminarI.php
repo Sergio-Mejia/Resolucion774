@@ -1,8 +1,8 @@
 <?php
 include("../Conexion/conexion.php");
-include('../Class/class_ingreso.php');
+include('../Class/class_servicio.php');
 
-$ing = new Ingresos();
+$ing = new Servicio();
 $ing->Eliminar($_GET['id']);
 
 ?>

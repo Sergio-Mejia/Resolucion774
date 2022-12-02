@@ -1,68 +1,65 @@
 <?php
 include("../Conexion/conexion.php");
-include('../Class/class_ingreso.php');
 include('../Class/class_estacion.php');
-include('../Class/control.php');
+
+
+$eg = new Estacion();
+
+if (isset($_POST['grabar']) && $_POST['grabar'] == "si") {
+    $eg->editar($_POST['id'], $_POST['nombre'], $_POST['direccion'], $_POST['departamento'], $_POST['municipio'], $_POST['tipo_area'], $_POST['altura'], $_POST['latitud'], $_POST['longitud']);
+    exit();
+}
+
+$reg = $eg->buscarEstacion($_GET['id']);
 ?>
 
 <!doctype html>
 <html lang="es">
-
-<html>
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS 
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  
+
     <link rel="stylesheet" language="javascript" href="../bootstrap/css/bootstrap.min.css">
 
     <!-- Sweet alert-->
     <link rel="stylesheet" href="../sw/dist/sweetalert2.min.css">
-
-    <!-- Iconos -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script type="text/javascript" language="javascript" src="../js/funciones.js"></script>
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Outfit:wght@300&family=Poppins:wght@300&display=swap" rel="stylesheet">
-    <!-- CSS -->
+    <!-- Iconos -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" language="javascript" src="../js/Funciones.js"></script>
     <link rel="stylesheet" href="../css/style.css">
 
-    <title>Resolucion 774</title>
+    <title>Editar Estacion</title>
 </head>
 
-<body style="background: -webkit-linear-gradient(bottom right,silver,grey,white); ">
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-        <h1 style="color:white;">Calculo simplificado</h1>
-        <a type='button' class='btn btn-outline-danger' style="margin-left: 650px;" href='../logout.php'>Cerrar Sesión</a>
-    </nav>
-    <div class="container" style="margin-top: 20px;">
-        <div class="row" style="text-align: center;">
-
-
-        </div>
-    </div>
-    <div class="container" style="margin-top: 50px;">
-        <div class="row">
-            <div class="col-lg-6">
-                <h3 align="center">Datos Estacion</h3>
-                <form action="../Estacion/insertarE.php" method="POST">
+<body style="background-color: #8c9091;">
+    <div class="container position-absolute top-50 start-50 translate-middle" style="width: 600px; margin:auto;border-radius: 5px;background:white;">
+        <table class="table table-borderless">
+            <div class="card-body">
+                <h2 class="Centrar">Editar Estacion</h2>
+                <hr>
+                <form action="#" method="POST">
+                    <input type="hidden" name="grabar" value="si">
+                    <label for="id">Id</label>
+                    <input class="form-control" type="number" name="id" value="<?php echo $_GET['id'] ?>" readonly>
                     <label for="">Nombre de la Estación</label>
-                    <input type="text" name="nombre" required>
+                    <input type="text" name="nombre" value="<?php echo $reg[0]['nombre'] ?>" required>
 
                     <label for="">Dirección</label>
-                    <input type="text" name="direccion" required>
+                    <input type="text" name="direccion" value="<?php echo $reg[0]['direccion'] ?>" required>
 
                     <label for="">departamento</label>
                     <select class="form-control" id="departamento" name="departamento" required>
-                        <option value=""> </option>
+
+                        <option value="<?php echo $reg[0]['departamento'] ?>"> <?php echo $reg[0]['departamento'] ?> </option>
+                        <option value="">Seleccione una opcion...</option>
                         <option value="Amazonas">Amazonas</option>
                         <option value="Antioquia">Antioquia</option>
                         <option value="Arauca">Arauca</option>
@@ -98,6 +95,8 @@ include('../Class/control.php');
                     </select>
                     <label for="">Municipio</label>
                     <select class="form-control" id="municipio" name="municipio" required>
+
+                        <option value="<?php echo $reg[0]['municipio'] ?>"> <?php echo $reg[0]['municipio'] ?> </option>
                         <option value="">Selecciona una opción...</option>
                         <option value="Abejorral">Abejorral</option>
                         <option value="Abrego">Abrego</option>
@@ -1223,87 +1222,32 @@ include('../Class/control.php');
 
                     <label for="">Tipo de área</label>
                     <select name=tipo_area>
+                        <option value="<?php echo $reg[0]['tipo_area'] ?>"> <?php echo $reg[0]['tipo_area'] ?> </option>
                         <option value="">Seleccione uno</option>
-                        <option value="rural">rural</option>
-                        <option value="urbano">urbano</option>
+                        <option value="<?php echo $reg[0]['tipo_area'] ?>">Rural</option>
+                        <option value="<?php echo $reg[0]['tipo_area'] ?>">Urbano</option>
                     </select>
                     <label for="">Altura (msnm)</label>
-                    <input type="number" name="altura">
+                    <input type="number" name="altura" value="<?php echo $reg[0]['altura'] ?>">
 
 
                     <h3>Coordenadas Geográficas</h3>
                     <label for="">Latitud</label>
-                    <input type="number" step="any" name="latitud">
+                    <input type="number" step="any" name="latitud" value="<?php echo $reg[0]['latitud'] ?>">
                     <label for="">Longitud</label>
-                    <input type="number" step="any" name="longitud">
+                    <input type="number" step="any" name="longitud" value="<?php echo $reg[0]['longitud'] ?>">
 
                     <div>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Registrar</button>
+                        <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Cambiar</button>
                     </div>
                 </form>
-            </div>
-        </div>
+        </table>
 
-
-
-        <div class="row">
-            <table class="table caption-top table-hover table-success">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">Departamento</th>
-                        <th scope="col">Municipio</th>
-                        <th scope="col">Área</th>
-                        <th scope="col">Altura</th>
-                        <th scope="col">Latitud</th>
-                        <th scope="col">Longitud</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $ing = new Estacion();
-                    $reg = $ing->Mostrar();
-
-                    for ($i = 0; $i < count($reg); $i++) {
-                        echo "<tr>";
-                        echo "<td>" . $reg[$i]['id'] . "</td>";
-                        echo "<td>" . $reg[$i]['nombre'] . "</td>";
-                        echo "<td>$" . $reg[$i]['direccion'] . "</td>";
-                        echo "<td>" . $reg[$i]['departamento'] . "</td>";
-                        echo "<td>" . $reg[$i]['municipio'] . "</td>";
-                        echo "<td>$" . $reg[$i]['tipo_area'] . "</td>";
-                        echo "<td>" . $reg[$i]['altura'] . "</td>";
-                        echo "<td>" . $reg[$i]['latitud'] . "</td>";
-                        echo "<td>$" . $reg[$i]['longitud'] . "</td>";
-                    ?>
-                        <td>
-                            <button type="button" class="btn btn-success" onclick=window.location="../Home/servicio.php?id=<?php echo $reg[$i]['id']; ?>">
-                                <span class="material-icons">add_circle</span>
-                            </button>
-                            <button class="btn btn-warning" onclick=window.location="../Estacion/editarE.php?id=<?php echo $reg[$i]['id']; ?>">
-                                <span class="material-icons">mode_edit</span>
-                            </button>
-                            <button class="btn btn-danger" onclick="eliminar('../Ingreso/eliminarI.php?id=<?php echo $reg[$i]['id']; ?>')">
-                                <span class="material-icons">cancel</span>
-                            </button>
-                        </td>
-                    <?php
-                    }
-                    ?>
-                    </tr>
-                </tbody>
-
-            </table>
-        </div>
     </div>
-
+    </div>
     <script src="../jquery/jquery-3.6.0.min.js"></script>
     <script src="../sw/dist/sweetalert2.all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
