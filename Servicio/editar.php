@@ -49,17 +49,18 @@ $reg = $ing->buscarservicio($_GET['id_servicio']);
                 <form action="#" method="POST">
                     <input type="hidden" name="grabar" value="si">
                     <label>Servicio</label>
-                    <input type="number" name="id" value="<?php echo $reg[0]['id_servicio'] ?> ">
+                    <input class="form-control" type="number" name="id" value="<?php echo $_GET['id_servicio'] ?>" readonly>
                     <label for="">Frecuencia</label>
-                    <input type="text" name="frecuencia" value="<?php echo $reg[0]['frecuencia'] ?>" required>
+                    <input class="form-control" type="text" name="frecuencia" value="<?php echo $reg[0]['frecuencia'] ?>" required>
 
                     <label for="">Potencia del Transmisor</label>
-                    <input type="text" name="potencia" value="<?php echo $reg[0]['potencia'] ?>" required>
+                    <input class="form-control" type="text" name="potencia" value="<?php echo $reg[0]['potencia'] ?>" required>
 
                     <label for="">Ganancia</label>
-                    <input type="text" name="ganancia" value="<?php echo $reg[0]['ganancia'] ?>" required>
+                    <input class="form-control" type="text" name="ganancia" value="<?php echo $reg[0]['ganancia'] ?>" required>
                     <div>
-                        <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Editar Servicio</button>
+                        </br>
+                        <button type="submit" class=" form-control btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Editar Servicio</button>
                     </div>
                 </form>
         </table>

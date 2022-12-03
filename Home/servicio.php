@@ -19,7 +19,7 @@ include('../Class/control.php');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  
+
     <link rel="stylesheet" language="javascript" href="../bootstrap/css/bootstrap.min.css">
 
     <!-- Sweet alert-->
@@ -38,38 +38,48 @@ include('../Class/control.php');
     <title>Resolucion 774</title>
 </head>
 
-<body style="background: -webkit-linear-gradient(bottom right,silver,grey,white); ">
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-        <h1 style="color:white;">Calculo simplificado</h1>
-        <a type='button' class='btn btn-outline-danger' style="margin-left: 650px;" href='../logout.php'>Cerrar Sesión</a>
-    </nav>
-    <div class="container" style="margin-top: 20px;">
-        <div class="row" style="text-align: center;">
-
-
-        </div>
-    </div>
-    <div class="container" style="margin-top: 50px;">
-        <div class="row">
-            <div class="col-lg-6">
-                <h3 align="center">Datos Estacion</h3>
-                <form action="../Servicio/insertar.php" method="POST">
-                    <input type="hidden" name="id_fk" value="<?php echo $_GET['id'] ?>">
-                    <label for="">Frecuencia</label>
-                    <input type="text" name="frecuencia" required>
-
-                    <label for="">Potencia del Transmisor</label>
-                    <input type="text" name="potencia" required>
-
-                    <label for="">Ganancia</label>
-                    <input type="text" name="ganancia" required>
-                    <div>
-                        <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Agregar Servicio</button>
-                    </div>
-                </form>
+<body>
+    <nav class="navbar bg-primary">
+        <div class="container-fluid">
+            <div class="display-4" style="color: white;">
+                Calculo Simpificado
+            </div>
+            <div>
+                <img src="http://comptic.grupovirtus.org/images/main-ud-logo-superior.png" alt="Escudo UDistrital" width="180">
             </div>
         </div>
+    </nav>
 
+    <div class="container" style="margin-top: 40px;">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-6">
+                <h2 align="center">Datos Estacion</h2>
+                <form action="../Servicio/insertar.php" method="POST">
+                    <input type="hidden" name="id_fk" value="<?php echo $_GET['id'] ?>">
+
+                    <div class="form-group">
+                        <label for="">Frecuencia</label>
+                        <input type="text" name="frecuencia" class="form-control dato1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Potencia del Transmisor</label>
+                        <input type="text" name="potencia" class="form-control dato1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Ganancia</label>
+                        <input type="text" name="ganancia" class="form-control dato1" required>
+                    </div>
+
+                    </br>
+                    <button type="submit" class="form-control btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Agregar Servicio</button>
+
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
 
 
         <div class="row">
