@@ -138,9 +138,19 @@ if ($reg2[0]['altura'] > $radioocupacional) {
                     <label for="">Distancia Ocupacional</label>
                     <input class="form-control" type="text" name="distancio" value="<?php echo $distanciao ?>" readonly>
 
-                    <div>
-                        </br>
-                        <button type="submit" class=" form-control btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Volver</button>
+                    </br>
+                    <div class="form-group">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <input class="form-control" type="hidden" name="id" value="<?php echo $_GET['id_servicio'] ?>" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class=" form-control btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Volver</button>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" type="hidden" name="frecuencia" value="<?php echo $pire ?>" readonly>
+                            </div>
+                        </div>
                     </div>
                 </form>
         </table>
