@@ -37,19 +37,18 @@ switch ($reg[0]['frecuencia']) {
         $radiopublico = 0.143 * sqrt($pire);
         $radioocupacional = 0.0638 * sqrt($pire);
         break;
-
 }
 
-if($reg2[0]['altura']>$radiopublico){
+if ($reg2[0]['altura'] > $radiopublico) {
     $distanciap = "Zona segura, la persona puede estar debajo de la antena";
-}else{
-    $distanciap = "Zona segura a ".sqrt(pow($radiopublico, 2)- pow($reg2[0]['altura'], 2))." metros de distancia";
+} else {
+    $distanciap = "Zona segura a " . sqrt(pow($radiopublico, 2) - pow($reg2[0]['altura'], 2)) . " metros de distancia";
 }
 
-if($reg2[0]['altura']>$radioocupacional){
+if ($reg2[0]['altura'] > $radioocupacional) {
     $distanciao = "Zona segura, la persona puede estar debajo de la antena";
-}else{
-    $distanciao = "Zona segura a ".sqrt(pow($radioocupacional, 2) - pow($reg2[0]['altura'], 2))." metros de distancia";
+} else {
+    $distanciao = "Zona segura a " . sqrt(pow($radioocupacional, 2) - pow($reg2[0]['altura'], 2)) . " metros de distancia";
 }
 
 
@@ -88,27 +87,50 @@ if($reg2[0]['altura']>$radioocupacional){
             <div class="card-body">
                 <h2 class="Centrar">Calculo simplificado</h2>
                 <hr>
-                <form  action="../Home/servicio.php?id=<?php echo $reg[0]['id_estacion_fk']; ?>" method="POST">
+                <form action="../Home/servicio.php?id=<?php echo $reg[0]['id_estacion_fk']; ?>" method="POST">
                     <input type="hidden" name="grabar" value="si">
-                    <label>Servicio</label>
-                    <input class="form-control" type="number" name="id" value="<?php echo $_GET['id_servicio'] ?>" readonly>
-                    <label for="">Frecuencia</label>
-                    <input class="form-control" type="text" name="frecuencia" value="<?php echo $reg[0]['frecuencia'] ?>" readonly>
+                    <div class="form-group">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label>Servicio</label>
+                                <input class="form-control" type="number" name="id" value="<?php echo $_GET['id_servicio'] ?>" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="">Frecuencia</label>
+                                <input class="form-control" type="text" name="frecuencia" value="<?php echo $reg[0]['frecuencia'] ?>" readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="">PIRE</label>
+                                <input class="form-control" type="text" name="frecuencia" value="<?php echo $pire ?>" readonly>
+                            </div>
+                        </div>
+                    </div>
 
-                    <label for="">Potencia del Transmisor</label>
-                    <input class="form-control" type="text" name="potencia" value="<?php echo $reg[0]['potencia'] ?>" readonly>
+                    <div class="form-group">
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <label for="">Potencia del Transmisor</label>
+                                <input class="form-control" type="text" name="potencia" value="<?php echo $reg[0]['potencia'] ?>" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Ganancia</label>
+                                <input class="form-control" type="text" name="ganancia" value="<?php echo $reg[0]['ganancia'] ?>" readonly>
+                            </div>
+                        </div>
+                    </div>
 
-                    <label for="">Ganancia</label>
-                    <input class="form-control" type="text" name="ganancia" value="<?php echo $reg[0]['ganancia'] ?>" readonly>
-
-                    <label for="">PIRE</label>
-                    <input class="form-control" type="text" name="frecuencia" value="<?php echo $pire ?>" readonly>
-
-                    <label for="">Radio (publico general)</label>
-                    <input class="form-control" type="text" name="potencia" value="<?php echo $radiopublico ?>" readonly>
-
-                    <label for="">Radio (exposición ocupacional)</label>
-                    <input class="form-control" type="text" name="potencia" value="<?php echo $radioocupacional ?>" readonly>
+                    <div class="form-group">
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <label for="">Radio (publico general)</label>
+                                <input class="form-control" type="text" name="potencia" value="<?php echo $radiopublico ?>" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="">Radio (exposición ocupacional)</label>
+                                <input class="form-control" type="text" name="potencia" value="<?php echo $radioocupacional ?>" readonly>
+                            </div>
+                        </div>
+                    </div>
 
                     <label for="">Distancia Publico General</label>
                     <input class="form-control" type="text" name="distanciap" value="<?php echo $distanciap ?>" readonly>
@@ -118,7 +140,7 @@ if($reg2[0]['altura']>$radioocupacional){
 
                     <div>
                         </br>
-                        <button type="submit" class=" form-control btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Volver</button> 
+                        <button type="submit" class=" form-control btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Volver</button>
                     </div>
                 </form>
         </table>

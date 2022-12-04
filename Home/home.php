@@ -1303,13 +1303,13 @@ include('../Class/class_estacion.php');
                         echo "<tr>";
                         echo "<td>" . $reg[$i]['id'] . "</td>";
                         echo "<td>" . $reg[$i]['nombre'] . "</td>";
-                        echo "<td>$" . $reg[$i]['direccion'] . "</td>";
+                        echo "<td>" . $reg[$i]['direccion'] . "</td>";
                         echo "<td>" . $reg[$i]['departamento'] . "</td>";
                         echo "<td>" . $reg[$i]['municipio'] . "</td>";
-                        echo "<td>$" . $reg[$i]['tipo_area'] . "</td>";
+                        echo "<td>" . $reg[$i]['tipo_area'] . "</td>";
                         echo "<td>" . $reg[$i]['altura'] . "</td>";
                         echo "<td>" . $reg[$i]['latitud'] . "</td>";
-                        echo "<td>$" . $reg[$i]['longitud'] . "</td>";
+                        echo "<td>" . $reg[$i]['longitud'] . "</td>";
                     ?>
                         <td>
                             <button type="button" class="btn btn-success" onclick=window.location="../Home/servicio.php?id=<?php echo $reg[$i]['id']; ?>">
