@@ -2,7 +2,6 @@
 include("../Conexion/conexion.php");
 include('../Class/class_servicio.php');
 include('../Class/class_estacion.php');
-include('../Class/control.php');
 ?>
 
 <!doctype html>
@@ -71,6 +70,7 @@ include('../Class/control.php');
                     <div class="form-group">
                         <label for="">Ganancia</label>
                         <input type="text" name="ganancia" class="form-control dato1" required>
+                        <input type="hidden" name="id_fk2" value="<?php echo $reg[0]['id_estacion_fk'] ?>">
                     </div>
 
                     </br>
@@ -97,7 +97,8 @@ include('../Class/control.php');
                 <tbody>
                     <?php
                     $ing = new Servicio();
-                    $reg = $ing->Mostrar();
+                    $reg = $ing->Mostrar($_GET['id']);
+
 
                     for ($i = 0; $i < count($reg); $i++) {
                         echo "<tr>";
@@ -108,13 +109,13 @@ include('../Class/control.php');
                         echo "<td>" . $reg[$i]['ganancia'] . "</td>";
                     ?>
                         <td>
-                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">
+                            <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio" onclick=window.location="../Home/calculo.php?id_servicio=<?php echo $reg[$i]['id_servicio']; ?>">
                                 <span class="material-icons">add_circle</span>
                             </button>
                             <button class="btn btn-warning" onclick=window.location="../Servicio/editar.php?id_servicio=<?php echo $reg[$i]['id_servicio']; ?>">
                                 <span class="material-icons">mode_edit</span>
                             </button>
-                            <button class="btn btn-danger" onclick="eliminar('../Servicio/eliminarl.php?id=<?php echo $reg[$i]['id_servicio']; ?>')">
+                            <button class="btn btn-danger" onclick="eliminar('../Servicio/eliminar.php?id_servicio=<?php echo $reg[$i]['id_servicio'];?>&id_fk2=<?php echo $reg[$i]['id_estacion_fk'];?>')">
                                 <span class="material-icons">cancel</span>
                             </button>
                         </td>
@@ -127,7 +128,6 @@ include('../Class/control.php');
             </table>
         </div>
     </div>
-
     <script src="../jquery/jquery-3.6.0.min.js"></script>
     <script src="../sw/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

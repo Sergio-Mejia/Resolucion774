@@ -6,7 +6,7 @@ include('../Class/class_servicio.php');
 $ing = new Servicio();
 
 if (isset($_POST['grabar']) && $_POST['grabar'] == "si") {
-    $ing->editar($_POST['id'], $_POST['ganancia'], $_POST['frecuencia'], $_POST['potencia']);
+    $ing->editar($_POST['id'], $_POST['ganancia'], $_POST['frecuencia'], $_POST['potencia'],$_POST['id_fk']);
     exit();
 }
 
@@ -58,6 +58,7 @@ $reg = $ing->buscarservicio($_GET['id_servicio']);
 
                     <label for="">Ganancia</label>
                     <input class="form-control" type="text" name="ganancia" value="<?php echo $reg[0]['ganancia'] ?>" required>
+                    <input type="hidden" name="id_fk" value="<?php echo $reg[0]['id_estacion_fk'] ?>">
                     <div>
                         </br>
                         <button type="submit" class=" form-control btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Editar Servicio</button>

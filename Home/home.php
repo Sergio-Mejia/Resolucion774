@@ -2,7 +2,6 @@
 include("../Conexion/conexion.php");
 include('../Class/class_servicio.php');
 include('../Class/class_estacion.php');
-include('../Class/control.php');
 ?>
 
 <!doctype html>
@@ -1242,7 +1241,7 @@ include('../Class/control.php');
                         <div class="row g-2">
                             <div class="col-md-6">
                                 <label for="">Tipo de área</label>
-                                <select class="form-select" name=tipo_area>
+                                <select class="form-select" name=tipo_area required>
                                     <option value="">Seleccione una opcion...</option>
                                     <option value="rural">rural</option>
                                     <option value="urbano">urbano</option>
@@ -1250,7 +1249,7 @@ include('../Class/control.php');
                             </div>
                             <div class="col-md-6">
                                 <label for="">Altura (msnm)</label>
-                                <input type="number" name="altura" class="form-control dato1">
+                                <input type="number" name="altura" class="form-control dato1" required>
                             </div>
                         </div>
                     </div>
@@ -1261,17 +1260,17 @@ include('../Class/control.php');
                         <div class="row g-2">
                             <div class="col-md-6">
                                 <label for="">Latitud</label>
-                                <input type="number" step="any" name="latitud" class="form-control dato1">
+                                <input type="number" step="any" name="latitud" class="form-control dato1" required>
 
                             </div>
                             <div class="col-md-6">
                                 <label for="">Longitud</label>
-                                <input type="number" step="any" name="longitud" class="form-control dato1">
+                                <input type="number" step="any" name="longitud" class="form-control dato1" required>
                             </div>
                         </div>
                     </div>
                     </br>
-                    <button type="button" class="form-control btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Registrar</button>
+                    <button type="submit" class="form-control btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Registrar</button>
 
                 </form>
             </div>
