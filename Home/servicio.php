@@ -32,17 +32,26 @@ include('../Class/class_estacion.php');
     <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css">
 
-    
+
 </head>
 
 <body>
     <nav class="navbar bg-primary">
         <div class="container-fluid">
-            <div class="display-4" style="color: white;">
-                Calculo Simpificado
+            <div class="" style="color: white;">
+                <div class="display-4">
+                    Espectro Redes Inalámbricas
+                </div>
+                <br>
+                <div class="">
+                    Sergio Daniel Mejia Carvajal &nbsp; 20192578074
+                </div>
+                <div class="">
+                    Danilo Esteban Sainea Romero &nbsp; 20192578065
+                </div>
             </div>
             <div>
-                <img src="http://comptic.grupovirtus.org/images/main-ud-logo-superior.png" alt="Escudo UDistrital" width="180">
+                <img src="../assets/Logo_UD.png" alt="Escudo UDistrital" width="180">
             </div>
         </div>
     </nav>

@@ -39,16 +39,16 @@ switch ($reg[0]['frecuencia']) {
         break;
 }
 
-if ($reg2[0]['altura'] > $radiopublico) {
+if (($reg2[0]['altura']-2) > $radiopublico) {
     $distanciap = "Zona segura, la persona puede estar debajo de la antena";
 } else {
-    $distanciap = "Zona segura a " . sqrt(pow($radiopublico, 2) - pow($reg2[0]['altura'], 2)) . " metros de distancia";
+    $distanciap = "Zona segura a " . sqrt(pow($radiopublico, 2) - pow(($reg2[0]['altura']-2), 2)) . " metros de distancia";
 }
 
-if ($reg2[0]['altura'] > $radioocupacional) {
+if (($reg2[0]['altura']-2) > $radioocupacional) {
     $distanciao = "Zona segura, la persona puede estar debajo de la antena";
 } else {
-    $distanciao = "Zona segura a " . sqrt(pow($radioocupacional, 2) - pow($reg2[0]['altura'], 2)) . " metros de distancia";
+    $distanciao = "Zona segura a " . sqrt(pow($radioocupacional, 2) - pow(($reg2[0]['altura']-2), 2)) . " metros de distancia";
 }
 
 
@@ -153,7 +153,24 @@ if ($reg2[0]['altura'] > $radioocupacional) {
                         </div>
                     </div>
                 </form>
+                <?php
+            if(($reg2[0]['altura']-2) > $radiopublico){
+                ?>
+                    <div><img src="../assets/Cumple.png" alt="Limites aceptados"></div>
+                <?php
+            }else if (($reg2[0]['altura']-2) < $radiopublico && ($reg2[0]['altura']-2) > $radioocupacional){
+                ?>
+                    <div><img src="../assets/Zona_Ocupacional.png" alt="Zona Ocupacional"></div>
+                <?php
+            }else{
+                ?>
+                    <div><img src="../assets/zona_rebasamiento.png" alt="Zona Rebasamiento"></div>
+                <?php
+            }
+        ?>
         </table>
+
+        
 
     </div>
     </div>
