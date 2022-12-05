@@ -11,7 +11,7 @@ $ing2 = new Estacion();
 $reg = $ing->buscarservicio($_GET['id_servicio']);
 $reg2 = $ing2->buscarEstacion($reg[0]['id_estacion_fk']);
 
-$pire = $reg[0]['ganancia'] + $reg[0]['potencia'];
+$pire = $reg[0]['ganancia'] + (10*Log10(($reg[0]['potencia'])/(1*pow(10,-3))));
 
 $distanciap = 0;
 $distanciao = 0;
@@ -39,16 +39,16 @@ switch ($reg[0]['frecuencia']) {
         break;
 }
 
-if (($reg2[0]['altura']-2) > $radiopublico) {
+if (($reg2[0]['altura'] - 2) > $radiopublico) {
     $distanciap = "Zona segura, la persona puede estar debajo de la antena";
 } else {
-    $distanciap = "Zona segura a " . sqrt(pow($radiopublico, 2) - pow(($reg2[0]['altura']-2), 2)) . " metros de distancia";
+    $distanciap = "Zona segura a " . sqrt(pow($radiopublico, 2) - pow(($reg2[0]['altura'] - 2), 2)) . " metros de distancia";
 }
 
-if (($reg2[0]['altura']-2) > $radioocupacional) {
+if (($reg2[0]['altura'] - 2) > $radioocupacional) {
     $distanciao = "Zona segura, la persona puede estar debajo de la antena";
 } else {
-    $distanciao = "Zona segura a " . sqrt(pow($radioocupacional, 2) - pow(($reg2[0]['altura']-2), 2)) . " metros de distancia";
+    $distanciao = "Zona segura a " . sqrt(pow($radioocupacional, 2) - pow(($reg2[0]['altura'] - 2), 2)) . " metros de distancia";
 }
 
 
@@ -144,6 +144,38 @@ if (($reg2[0]['altura']-2) > $radioocupacional) {
                             <div class="col-md-4">
                                 <input class="form-control" type="hidden" name="id" value="<?php echo $_GET['id_servicio'] ?>" readonly>
                             </div>
+                            <style>
+                                .img-container {
+                                    text-align: center;
+                                }
+                            </style>
+                            <div class="col-md-4">
+                                <?php
+                                if (($reg2[0]['altura'] - 2) > $radiopublico) {
+                                ?>
+                                    <div class="img-container"><img align="center" src="https://www.ane.gov.co/Documentos%20compartidos/ArchivosDescargables/Normatividad/Radiaciones_no_ionizantes/Aviso_Visible_Cumplimiento.jpg" width="150" height="200" alt="Limites aceptados"></div>
+                                <?php
+                                } else if (($reg2[0]['altura'] - 2) < $radiopublico && ($reg2[0]['altura'] - 2) > $radioocupacional) {
+                                ?>
+                                    <div><img src="https://www.ane.gov.co/Documentos%20compartidos/ArchivosDescargables/Normatividad/Radiaciones_no_ionizantes/Aviso_Zona_Ocupacional.jpg?s=A81904D7AC016B535F764C8A9083915AE07D5A9D" width="150" height="200" alt="Zona Ocupacional"></div>
+                                <?php
+                                } else {
+                                ?>
+                                    <div><img src="https://www.ane.gov.co/Documentos%20compartidos/ArchivosDescargables/Normatividad/Radiaciones_no_ionizantes/Aviso_Zona_Rebasamiento.jpg?s=6C0EF41B6B4E647036D5BE58A86C6CAD6A23EACB" width="150" height="200" alt="Zona Rebasamiento"></div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" type="hidden" name="id" value="<?php echo $_GET['id_servicio'] ?>" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <input class="form-control" type="hidden" name="id" value="<?php echo $_GET['id_servicio'] ?>" readonly>
+                            </div>
                             <div class="col-md-4">
                                 <button type="submit" class=" form-control btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Agregar servicio">Volver</button>
                             </div>
@@ -153,24 +185,10 @@ if (($reg2[0]['altura']-2) > $radioocupacional) {
                         </div>
                     </div>
                 </form>
-                <?php
-            if(($reg2[0]['altura']-2) > $radiopublico){
-                ?>
-                    <div><img src="../assets/Cumple.png" alt="Limites aceptados"></div>
-                <?php
-            }else if (($reg2[0]['altura']-2) < $radiopublico && ($reg2[0]['altura']-2) > $radioocupacional){
-                ?>
-                    <div><img src="../assets/Zona_Ocupacional.png" alt="Zona Ocupacional"></div>
-                <?php
-            }else{
-                ?>
-                    <div><img src="../assets/zona_rebasamiento.png" alt="Zona Rebasamiento"></div>
-                <?php
-            }
-        ?>
+
         </table>
 
-        
+
 
     </div>
     </div>

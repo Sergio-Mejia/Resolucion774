@@ -65,17 +65,17 @@ include('../Class/class_estacion.php');
                     <input type="hidden" name="id_fk" value="<?php echo $_GET['id'] ?>">
 
                     <div class="form-group">
-                        <label for="">Frecuencia</label>
+                        <label for="">Frecuencia (MHz) </label>
                         <input type="text" name="frecuencia" class="form-control dato1" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="">Potencia del Transmisor</label>
+                        <label for="">Potencia del Transmisor (W)</label>
                         <input type="text" name="potencia" class="form-control dato1" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="">Ganancia</label>
+                        <label for="">Ganancia (dBi)</label>
                         <input type="text" name="ganancia" class="form-control dato1" required>
                         <input type="hidden" name="id_fk2" value="<?php echo $reg[0]['id_estacion_fk'] ?>">
                     </div>
@@ -103,9 +103,9 @@ include('../Class/class_estacion.php');
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Estacion</th>
-                        <th scope="col">Frecuencia</th>
-                        <th scope="col">Potencia</th>
-                        <th scope="col">Ganancia</th>
+                        <th scope="col">Frecuencia en MHz</th>
+                        <th scope="col">Potencia en W</th>
+                        <th scope="col">Ganancia en dBi</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>

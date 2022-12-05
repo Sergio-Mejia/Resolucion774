@@ -1258,7 +1258,7 @@ include('../Class/class_estacion.php');
                             </div>
                             <div class="col-md-6">
                                 <label for="">Altura (msnm)</label>
-                                <input type="number" name="altura" class="form-control dato1" required>
+                                <input min="2" type="number" name="altura" class="form-control dato1" required>
                             </div>
                         </div>
                     </div>
