@@ -6,7 +6,7 @@ include('../Class/class_servicio.php');
 $ing = new Servicio();
 
 if (isset($_POST['grabar']) && $_POST['grabar'] == "si") {
-    $ing->editar($_POST['id'], $_POST['ganancia'], $_POST['frecuencia'], $_POST['potencia'],$_POST['id_fk']);
+    $ing->editar($_POST['id'], $_POST['ganancia'], $_POST['frecuencia'], $_POST['potencia'],$_POST['id_fk'], $_POST['tipo_servicio']);
     exit();
 }
 
@@ -48,8 +48,23 @@ $reg = $ing->buscarservicio($_GET['id_servicio']);
                 <hr>
                 <form action="#" method="POST">
                     <input type="hidden" name="grabar" value="si">
+                 
                     <label>Servicio</label>
                     <input class="form-control" type="number" name="id" value="<?php echo $_GET['id_servicio'] ?>" readonly>
+
+                    <div class="form-group">
+                        <label for="">Tipo de Servicio</label>
+                        <select class="form-select" id="tipo_servicio" name="tipo_servicio" required>
+                        <option value="<?php echo $reg[0]['tipo_servicio'] ?>"> <?php echo $reg[0]['tipo_servicio'] ?> </option>
+                            <option value="">Seleccione una opción...</option>
+                            <option value="Radio AM">Radiodifusión A.M</option>
+                            <option value="Radio FM">Radiodifusión F.M</option>
+                            <option value="TV Digital">Televisión Digital</option>
+                            <option value="TV Analoga">Televisión Análoga</option>
+                            <option value="Emisora FM">Emisora F.M comunitaria</option>
+                        </select>
+                    </div>
+
                     <label for="">Frecuencia</label>
                     <input class="form-control" type="text" name="frecuencia" value="<?php echo $reg[0]['frecuencia'] ?>" required>
 

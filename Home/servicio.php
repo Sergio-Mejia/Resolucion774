@@ -65,6 +65,17 @@ include('../Class/class_estacion.php');
                     <input type="hidden" name="id_fk" value="<?php echo $_GET['id'] ?>">
 
                     <div class="form-group">
+                        <label for="">Tipo de Servicio</label>
+                        <select class="form-select" id="tipo_servicio" name="tipo_servicio" required>
+                            <option value="na">Seleccione una opción...</option>
+                            <option value="Radio AM">Radiodifusión A.M</option>
+                            <option value="Radio FM">Radiodifusión F.M</option>
+                            <option value="TV Digital">Televisión Digital</option>
+                            <option value="TV Analoga">Televisión Análoga</option>
+                            <option value="Emisora FM">Emisora F.M comunitaria</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="">Frecuencia (MHz) </label>
                         <input type="text" name="frecuencia" class="form-control dato1" required>
                     </div>
@@ -103,6 +114,7 @@ include('../Class/class_estacion.php');
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Estacion</th>
+                        <th scope="col">Servicio</th>
                         <th scope="col">Frecuencia en MHz</th>
                         <th scope="col">Potencia en W</th>
                         <th scope="col">Ganancia en dBi</th>
@@ -119,6 +131,7 @@ include('../Class/class_estacion.php');
                         echo "<tr>";
                         echo "<td>" . $reg[$i]['id_servicio'] . "</td>";
                         echo "<td>" . $reg[$i]['id_estacion_fk'] . "</td>";
+                        echo "<td>" . $reg[$i]['tipo_servicio'] . "</td>";
                         echo "<td>" . $reg[$i]['frecuencia'] . "</td>";
                         echo "<td>" . $reg[$i]['potencia'] . "</td>";
                         echo "<td>" . $reg[$i]['ganancia'] . "</td>";
