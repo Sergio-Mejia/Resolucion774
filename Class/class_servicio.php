@@ -34,9 +34,9 @@
 
         //mostar servicios
 
-        public function Mostrar()
+        public function Mostrar($id)
         {
-            $sql = "SELECT `id_servicio`, `id_estacion_fk`, `ganancia`, `frecuencia`, `potencia` FROM `servicio` WHERE 1";
+            $sql = "SELECT `id_servicio`, `id_estacion_fk`, `ganancia`, `frecuencia`, `potencia`, `tipo_servicio` FROM `servicio` where `id_estacion_fk` = $id";
             $res = mysqli_query(Conexion::conectar(), $sql);
 
             while ($row = mysqli_fetch_assoc($res)) {
@@ -45,9 +45,9 @@
             return $this->servicio;
         }
 
-        public function insertar($id_fk,$ganancia,$frecuencia,$potencia)
+        public function insertar($id_fk,$ganancia,$frecuencia,$potencia, $tiposervicio)
         {
-            $sql = "INSERT INTO `servicio`(`id_estacion_fk`, `ganancia`, `frecuencia`, `potencia`) VALUES ('$id_fk','$ganancia','$frecuencia','$potencia')";
+            $sql = "INSERT INTO `servicio`(`id_estacion_fk`, `ganancia`, `frecuencia`, `potencia`, `tipo_servicio`) VALUES ('$id_fk','$ganancia','$frecuencia','$potencia', '$tiposervicio')";
             $res = mysqli_query(Conexion::conectar(), $sql) or die("Error en la consulta sql al insertar servicio");
             echo " 
                 <script type = 'text/javascript'>
@@ -63,7 +63,7 @@
                       }
                 }).then((result)=>{
                         if(result.value){
-                            window.location ='../Home/servicio.php';
+                            window.location ='../Home/servicio.php?id=$id_fk';
                         }
                     });
                 </script>
@@ -72,9 +72,9 @@
 
 
 
-        public function  editar($id,$ganancia,$frecuencia,$potencia)
+        public function  editar($id,$ganancia,$frecuencia,$potencia,$id_fk, $tipo_servicio)
         {
-            $sql = "UPDATE `servicio` SET `ganancia`='$ganancia',`frecuencia`='$frecuencia',`potencia`='$potencia' WHERE `id_servicio`=$id";
+            $sql = "UPDATE `servicio` SET `ganancia`='$ganancia',`frecuencia`='$frecuencia',`potencia`='$potencia', `tipo_servicio`='$tipo_servicio' WHERE `id_servicio`=$id";
             $res = mysqli_query(Conexion::conectar(), $sql) or die("Error en la consulta sql al editar");
             echo " 
             <script type = 'text/javascript'>
@@ -90,7 +90,7 @@
                   }
             }).then((result)=>{
                     if(result.value){
-                        window.location ='../Home/servicio.php';
+                        window.location ='../Home/servicio.php?id=$id_fk';
                     }
                 });
             </script>
@@ -99,7 +99,7 @@
 
         public function buscarservicio($id)
         {
-            $sql = "select * from `servicio` where `id_servicio` = $id";
+            $sql = "select `id_estacion_fk`, `ganancia`, `frecuencia`, `potencia`, `tipo_servicio` from `servicio` where  `id_servicio` = $id";
             $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al buscar");
             if ($reg = mysqli_fetch_assoc($res)) {
                 $this->servicio[] = $reg;
@@ -107,10 +107,11 @@
             return $this->servicio;
         }
 
-        public function Eliminar($id)
+        public function Eliminar($id,$id_fk)
         {
-            $sql = "DELETE FROM `servicio` WHERE `id_servicio` = $id";
-            $res = mysqli_query(Conexion::Conectar(), $sql) or die("Error en la consulta sql al Eliminar");
+            
+            $sql2 = "DELETE FROM `servicio` WHERE `id_servicio` = $id";
+            $res2 = mysqli_query(Conexion::Conectar(), $sql2) or die("Error en la consulta sql al Eliminar");
             echo " 
             <script type = 'text/javascript'>
             Swal.fire({
@@ -125,7 +126,7 @@
                   }
             }).then((result)=>{
                     if(result.value){
-                        window.location ='../Home/servicio.php';
+                        window.location ='../Home/servicio.php?id=$id_fk';
                     }
                 });
             </script>
